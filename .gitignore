@@ -1,0 +1,70 @@
+# ─── OS & IDE ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-*
+
+# ─── Environment & Secrets ──────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.testing
+*.pem
+*.key
+auth.json
+
+# ─── Laravel (backend/) ─────────────────────────────────────
+backend/vendor/
+backend/node_modules/
+backend/public/hot
+backend/public/storage
+backend/storage/*.key
+backend/storage/app/public/*
+!backend/storage/app/public/.gitkeep
+backend/storage/framework/cache/*
+!backend/storage/framework/cache/.gitkeep
+backend/storage/framework/sessions/*
+!backend/storage/framework/sessions/.gitkeep
+backend/storage/framework/views/*
+!backend/storage/framework/views/.gitkeep
+backend/storage/logs/*
+!backend/storage/logs/.gitkeep
+backend/bootstrap/cache/*
+!backend/bootstrap/cache/.gitkeep
+backend/.phpunit.result.cache
+backend/.php-cs-fixer.cache
+backend/Homestead.json
+backend/Homestead.yaml
+backend/npm-debug.log
+backend/yarn-error.log
+
+# ─── React Native (mobile/) ─────────────────────────────────
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/build/
+mobile/android/app/build/
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/ios/Pods/
+mobile/ios/build/
+mobile/ios/*.xcworkspace/xcuserdata/
+mobile/ios/*.xcodeproj/xcuserdata/
+mobile/*.jks
+mobile/*.p8
+mobile/*.p12
+mobile/*.mobileprovision
+mobile/.metro-health-check*
+
+# ─── Testing & Coverage ───────────────────────────────────────
+coverage/
+*.lcov
+.nyc_output/
+
+# ─── Misc ───────────────────────────────────────────────────
+*.log
+*.tmp
+.cache/
