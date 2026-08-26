@@ -28,12 +28,11 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
   const bootstrap = useCallback(async () => {
     try {
       const token = await tokenStorage.load();
-      if (!token) {
-        return;
+      if (token) {
+        authService.applyToken(token);
+        const profile = await authService.fetchMe();
+        setUser(profile);
       }
-      authService.applyToken(token);
-      const profile = await authService.fetchMe();
-      setUser(profile);
     } catch {
       await tokenStorage.clear();
       authService.applyToken(null);

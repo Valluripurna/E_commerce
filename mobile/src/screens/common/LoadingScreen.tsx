@@ -1,14 +1,25 @@
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
-import {Center, Text} from 'native-base';
+import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 
 export default function LoadingScreen() {
   return (
-    <Center flex={1} bg="white">
+    <View style={styles.container}>
       <ActivityIndicator size="large" color="#4f46e5" />
-      <Text mt={4} color="gray.500">
-        Loading...
-      </Text>
-    </Center>
+      <Text style={styles.text}>Loading E-Commerce...</Text>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    marginTop: 16,
+    color: '#6b7280',
+    fontSize: 16,
+  },
+});
