@@ -23,7 +23,7 @@ jobs:
       - name: Install Dependencies
         run: |
           cd backend
-          composer install --prefer-dist --no-progress --no-interaction --no-audit
+          composer install --prefer-dist --no-progress --no-interaction
 
       - name: Run Tests
         run: |

@@ -1,4 +1,4 @@
-name: Mobile CI (React Native)
+name: Mobile CI & Android Build (React Native)
 
 on:
   push:
@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: 20
 
+      - name: Setup Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Install Dependencies
         run: |
           cd mobile
@@ -32,3 +38,17 @@ jobs:
         run: |
           cd mobile
           npm test -- --passWithNoTests
+
+      - name: Grant Execute Permission for Gradlew
+        run: chmod +x mobile/android/gradlew
+
+      - name: Build Android Debug APK
+        run: |
+          cd mobile/android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ECommerce-Mobile-App-APK
+          path: mobile/android/app/build/outputs/apk/debug/app-debug.apk
