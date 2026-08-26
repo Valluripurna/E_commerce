@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -29,7 +30,10 @@ return new class extends Migration
             $table->index(['is_active', 'is_featured']);
             $table->index('price');
             $table->index('stock_quantity');
-            $table->fullText(['name', 'description']);
+            
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->fullText(['name', 'description']);
+            }
         });
 
         Schema::create('product_images', function (Blueprint $table) {

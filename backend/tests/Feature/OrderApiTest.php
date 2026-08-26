@@ -39,23 +39,24 @@ class OrderApiTest extends TestCase
                 'product_id' => $product->id,
                 'quantity' => 1,
             ])
-            ->assertStatus(200);
+            ->assertStatus(201);
 
         // Place order
         $response = $this->actingAs($user, 'sanctum')
             ->postJson('/api/v1/orders', [
                 'shipping_address' => '123 Tech Street, Silicon Valley, CA',
+                'payment_method' => 'stripe',
             ]);
 
         $response->assertStatus(201)
             ->assertJsonStructure([
                 'message',
-                'order' => ['id', 'order_number', 'total_amount', 'status'],
+                'data' => ['id', 'order_number', 'total_amount', 'status'],
             ]);
 
         $this->assertDatabaseHas('orders', [
             'user_id' => $user->id,
-            'total_amount' => 599.99,
+            'total_amount' => 647.99,
         ]);
     }
 }

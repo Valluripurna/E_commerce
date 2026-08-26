@@ -54,8 +54,8 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) {
             if ($user->isCustomer()) {
-                Cart::create(['user_id' => $user->id]);
-                Wishlist::create(['user_id' => $user->id]);
+                Cart::firstOrCreate(['user_id' => $user->id]);
+                Wishlist::firstOrCreate(['user_id' => $user->id]);
             }
         });
     }

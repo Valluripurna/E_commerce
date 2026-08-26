@@ -12,7 +12,9 @@ class PaymentService
 {
     public function createPaymentIntent(Order $order, Payment $payment): array
     {
-        if (app()->environment('local', 'testing') && !config('services.stripe.secret')) {
+        $stripeSecret = config('services.stripe.secret');
+
+        if (app()->environment('local', 'testing') && (empty($stripeSecret) || str_contains($stripeSecret, 'sk_test_xxx'))) {
             $fakeIntentId = 'pi_test_'.Str::random(16);
 
             $payment->update([
@@ -27,7 +29,7 @@ class PaymentService
             ];
         }
 
-        $response = Http::withToken(config('services.stripe.secret'))
+        $response = Http::withToken($stripeSecret)
             ->asForm()
             ->post('https://api.stripe.com/v1/payment_intents', [
                 'amount' => (int) round($order->total_amount * 100),

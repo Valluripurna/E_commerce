@@ -15,7 +15,7 @@ class CartTest extends TestCase
     public function test_customer_can_add_item_to_cart(): void
     {
         $customer = User::factory()->customer()->create();
-        Cart::create(['user_id' => $customer->id]);
+        Cart::firstOrCreate(['user_id' => $customer->id]);
         $product = Product::factory()->create(['stock_quantity' => 10, 'price' => 25.00]);
         $token = $customer->createToken('test')->plainTextToken;
 
@@ -37,7 +37,7 @@ class CartTest extends TestCase
     public function test_cannot_add_more_than_stock(): void
     {
         $customer = User::factory()->customer()->create();
-        Cart::create(['user_id' => $customer->id]);
+        Cart::firstOrCreate(['user_id' => $customer->id]);
         $product = Product::factory()->create(['stock_quantity' => 2]);
         $token = $customer->createToken('test')->plainTextToken;
 

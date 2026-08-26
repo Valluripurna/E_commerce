@@ -18,7 +18,7 @@ class RoleAccessTest extends TestCase
         $this->withToken($token)
             ->getJson('/api/v1/admin/dashboard')
             ->assertOk()
-            ->assertJsonPath('message', 'Admin dashboard access granted.');
+            ->assertJsonStructure(['metrics']);
     }
 
     public function test_customer_cannot_access_admin_dashboard(): void

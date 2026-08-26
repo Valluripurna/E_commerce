@@ -16,7 +16,7 @@ class OrderPlacementTest extends TestCase
     public function test_customer_can_place_order_from_cart(): void
     {
         $customer = User::factory()->customer()->create();
-        $cart = Cart::create(['user_id' => $customer->id]);
+        $cart = Cart::firstOrCreate(['user_id' => $customer->id]);
         $product = Product::factory()->create([
             'stock_quantity' => 10,
             'price' => 50.00,
@@ -48,7 +48,7 @@ class OrderPlacementTest extends TestCase
     public function test_payment_confirm_marks_order_processing(): void
     {
         $customer = User::factory()->customer()->create();
-        $cart = Cart::create(['user_id' => $customer->id]);
+        $cart = Cart::firstOrCreate(['user_id' => $customer->id]);
         $product = Product::factory()->create(['stock_quantity' => 5, 'price' => 20]);
 
         CartItem::create([
